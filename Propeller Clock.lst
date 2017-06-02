@@ -1,11 +1,11 @@
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  1
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00001 ; Propeller clock to display OTP
-                      00002     
+                      00002 ; RB7 is top, RB0 is bottom
                       00003 
                       00004 MAIN_PROG CODE
                       00005 
@@ -18,76 +18,116 @@ Message[301]: MESSAGE: (Processor-header file mismatch.  Verify selected process
                       00617         LIST
                       00009  
   00000020            00010 COUNT EQU 0x20
-                      00011  
+  00000015            00011 ENTRIES EQU .21 ; however many entries for LEDs
                       00012  
-0000                  00013 reset:
-                      00014     ORG 0x00
-0000   2???           00015     GOTO setup
-                      00016         ORG 0x04
-0004   2???           00017         GOTO isr
-                      00018   
-                      00019 
-0005                  00020 setup:
-0005   1683 1703      00021     BANKSEL ANSELH
+                      00013  
+0000                  00014 reset:
+                      00015     ORG 0x00
+0000   2???           00016     GOTO setup
+                      00017         ORG 0x04
+0004   2???           00018         GOTO isr
+                      00019   
+                      00020 
+0005                  00021 setup:
+0005   1683 1703      00022     BANKSEL ANSELH
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0189           00022         CLRF ANSELH ; digital I/O
-0008   1683 1303      00023         BANKSEL TRISB
+0007   0189           00023         CLRF ANSELH ; digital I/O
+0008   1683 1303      00024         BANKSEL TRISB
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   0186           00024         CLRF TRISB ; all output
-000B   1283 1303      00025         BANKSEL PORTB
-000D   3000           00026         MOVLW 0x00
-000E   00A0           00027         MOVWF COUNT
-                      00028         
-000F                  00029 main:
-000F   0820           00030         MOVF COUNT, 0
-0010   2???           00031         CALL display
-0011   0086           00032         MOVWF PORTB
-0012   2???           00033         CALL oneDegreeDelay
+000A   0186           00025         CLRF TRISB ; all output
+000B   1283 1303      00026         BANKSEL PORTB
+000D   3000           00027         MOVLW 0x00
+000E   00A0           00028         MOVWF COUNT
+                      00029         
+000F                  00030 main:
+000F   0820           00031         MOVF COUNT, 0
+0010   2???           00032         CALL display
+0011   0086           00033         MOVWF PORTB
 Message[305]: Using default destination of 1 (file).
-0013   0AA0           00034         INCF COUNT
-0014   0820           00035         MOVF COUNT, 0
-0015   3C14           00036         SUBLW .20 ; however many entries for LEDs
-0016   1903           00037         BTFSC STATUS, Z
-0017   2???           00038         GOTO endOfDisplay
-0018   2???           00039         GOTO main
+0012   0AA0           00034         INCF COUNT
+0013   0820           00035         MOVF COUNT, 0
+0014   3C15           00036         SUBLW ENTRIES 
+0015   1903           00037         BTFSC STATUS, Z
+0016   2???           00038         GOTO endOfDisplay
+0017   2???           00039         GOTO main
                       00040         
-0019                  00041 endOfDisplay:
+0018                  00041 endOfDisplay:
 Warning[202]: Argument out of range.  Least significant bits used.
-0019   300E           00042         MOVLW .270 ; however many degrees of blank space
-001A   00A0           00043         MOVWF COUNT
+0018   3067           00042         MOVLW .359
+0019   3C15           00043         SUBLW ENTRIES
+001A   00A0           00044         MOVWF COUNT
 Warning[207]: Found label after column 1. (loop)
-001B                  00044         loop: 
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  2
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-001B   2???           00045                 CALL oneDegreeDelay
+001B                  00045         loop: 
+001B   0000           00046                 NOP
+001C   0000           00047                 NOP
+001D   0000           00048                 NOP
+001E   0000           00049                 NOP
+001F   0000           00050                 NOP
+0020   0000           00051                 NOP
+0021   0000           00052                 NOP
+0022   0000           00053                 NOP
+0023   0000           00054                 NOP
+0024   0000           00055                 NOP
 Message[305]: Using default destination of 1 (file).
-001C   0BA0           00046                 DECFSZ COUNT
-001D   2???           00047                 GOTO loop
-001E   3000           00048         MOVLW .0
-001F   00A0           00049         MOVWF COUNT
-0020   0008           00050         RETURN
-                      00051         
-                      00052         
-0021                  00053 display:
-0021   0782           00054         ADDWF PCL, F
-0022   34EF           00055         RETLW b'11101111'
-                      00056         
-                      00057         
-                      00058         
-0023                  00059 oneDegreeDelay:
-0023   0008           00060         RETURN
-                      00061         
-0024                  00062 isr:
-0024   0000           00063         NOP
-0025   0009           00064         RETFIE
-                      00065     
-0026                  00066 _end: 
-                      00067     END
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  3
+0025   0BA0           00056                 DECFSZ COUNT
+0026   2???           00057                 GOTO loop
+0027   3000           00058         MOVLW .0
+0028   00A0           00059         MOVWF COUNT
+0029   0000           00060         NOP
+002A   0000           00061         NOP
+002B   0000           00062         NOP
+002C   0000           00063         NOP
+002D   0000           00064         NOP
+002E   0008           00065         RETURN
+                      00066         
+                      00067         
+002F                  00068 display:
+002F   0782           00069         ADDWF PCL, F
+0030   34FF           00070         RETLW b'11111111'
+0031   3481           00071         Retlw b'10000001'
+0032   3481           00072         RETLW B'10000001'
+0033   3481           00073         RETLW B'10000001'
+0034   34FF           00074         RETLW B'11111111'
+0035   3400           00075         RETLW B'00000000'
+0036   3400           00076         RETLW B'00000000'
+0037   3400           00077         RETLW B'00000000'
+0038   3480           00078         RETLW B'10000000'
+0039   3480           00079         RETLW B'10000000'
+003A   34FF           00080         RETLW B'11111111'
+003B   3480           00081         RETLW B'10000000'
+003C   3480           00082         RETLW B'10000000'
+003D   3400           00083         RETLW B'00000000'
+003E   3400           00084         RETLW B'00000000'
+003F   3400           00085         RETLW B'00000000'
+0040   34FF           00086         RETLW B'11111111'
+0041   3490           00087         RETLW B'10010000'
+0042   3490           00088         RETLW B'10010000'
+0043   3490           00089         RETLW B'10010000'
+0044   34F0           00090         RETLW B'11110000'
+                      00091         
+                      00092                 
+0045                  00093 oneDegreeDelay:
+0045   0008           00094         RETURN
+                      00095         
+0046                  00096 isr:
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0046   0000           00097         NOP
+0047   0009           00098         RETFIE
+                      00099     
+0048                  00100 _end: 
+                      00101     END
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  4
 
 
 SYMBOL TABLE
@@ -146,7 +186,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  4
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  5
 
 
 SYMBOL TABLE
@@ -205,7 +245,7 @@ CHS2                              00000004
 CHS3                              00000005
 CKE                               00000006
 CKP                               00000004
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  5
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  6
 
 
 SYMBOL TABLE
@@ -240,6 +280,7 @@ EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
+ENTRIES                           00000015
 F                                 00000001
 FERR                              00000002
 FSR                               00000004
@@ -263,13 +304,13 @@ IOCB0                             00000000
 IOCB1                             00000001
 IOCB2                             00000002
 IOCB3                             00000003
-IOCB4                             00000004
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  6
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+IOCB4                             00000004
 IOCB5                             00000005
 IOCB6                             00000006
 IOCB7                             00000007
@@ -322,13 +363,13 @@ PIE2                              0000008D
 PIR1                              0000000C
 PIR2                              0000000D
 PORTA                             00000005
-PORTB                             00000006
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  7
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PORTB                             00000006
 PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
@@ -381,13 +422,13 @@ SR1                               00000007
 SRCON                             00000185
 SREN                              00000005
 SSPADD                            00000093
-SSPBUF                            00000013
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  8
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
@@ -440,13 +481,13 @@ TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
 TOUTPS1                           00000004
-TOUTPS2                           00000005
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE  9
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TOUTPS2                           00000005
 TOUTPS3                           00000006
 TRISA                             00000085
 TRISB                             00000086
@@ -499,13 +540,13 @@ WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
 WPUB7                             00000007
-WR                                00000001
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE 10
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+WR                                00000001
 WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
@@ -553,20 +594,19 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F877A                         00000001
-__DEBUG                           1
-_end                              00000026
-display                           00000021
-endOfDisplay                      00000019
-isr                               00000024
+_end                              00000048
+display                           0000002F
+endOfDisplay                      00000018
+isr                               00000046
 loop                              0000001B
-MPASM  5.35               PROPELLER CLOCK.ASM   6-1-2017  8:48:07         PAGE 11
+MPASM  5.35               PROPELLER CLOCK.ASM   6-2-2017  11:29:15         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 main                              0000000F
-oneDegreeDelay                    00000023
+oneDegreeDelay                    00000045
 reset                             00000000
 setup                             00000005
 
