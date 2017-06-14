@@ -1,7 +1,10 @@
 Message[301] C:\PROGRAM FILES (X86)\MICROCHIP\MPASM SUITE\P16F887.INC 33 : MESSAGE: (Processor-header file mismatch.  Verify selected processor.)
-Message[302] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 23 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 25 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 34 : Using default destination of 1 (file).
-Warning[202] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 42 : Argument out of range.  Least significant bits used.
-Warning[207] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 45 : Found label after column 1. (loop)
-Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 56 : Using default destination of 1 (file).
+Message[302] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 37 : Using default destination of 1 (file).
+Warning[207] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 48 : Found label after column 1. (degLoop)
+Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 49 : Using default destination of 1 (file).
+Warning[207] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 59 : Found label after column 1. (loop2)
+Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 61 : Using default destination of 1 (file).
+Warning[207] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 66 : Found label after column 1. (loop)
+Message[305] C:\USERS\SNG\DOCUMENTS\GITHUB\PROPELLER-CLOCK\PROPELLER CLOCK.ASM 68 : Using default destination of 1 (file).

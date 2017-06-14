@@ -1,5 +1,5 @@
 MPLINK 4.35, Linker
-Linker Map File - Created Fri Jun 02 11:29:16 2017
+Linker Map File - Created Wed Jun 14 02:03:21 2017
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -7,7 +7,7 @@ Linker Map File - Created Fri Jun 02 11:29:16 2017
                    .org_0       code   0x000000    program   0x000002
                    .cinit    romdata   0x000001    program   0x000004
                 MAIN_PROG       code   0x000003    program   0x000000
-                   .org_1       code   0x000004    program   0x000088
+                   .org_1       code   0x000004    program   0x000082
 
 
 
@@ -15,8 +15,8 @@ Linker Map File - Created Fri Jun 02 11:29:16 2017
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000002      
-                            0x000004    0x000047      
-            71 out of 8453 program addresses used, program memory utilization is 0%
+                            0x000004    0x000044      
+            68 out of 8453 program addresses used, program memory utilization is 0%
 
 
 
@@ -24,13 +24,15 @@ Linker Map File - Created Fri Jun 02 11:29:16 2017
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                     START   0x000003    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                     _end   0x000048    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                  display   0x00002f    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-             endOfDisplay   0x000018    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                      isr   0x000046    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                     loop   0x00001b    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                     _end   0x000045    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                  degLoop   0x00001b    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                  display   0x00002d    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+             endOfDisplay   0x00001e    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                      isr   0x000043    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                     loop   0x000027    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                    loop2   0x000021    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
                      main   0x00000f    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-           oneDegreeDelay   0x000045    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+           oneDegreeDelay   0x000019    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
                     reset   0x000003    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
                     setup   0x000005    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
 
@@ -43,11 +45,13 @@ Linker Map File - Created Fri Jun 02 11:29:16 2017
                     reset   0x000003    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
                     setup   0x000005    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
                      main   0x00000f    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-             endOfDisplay   0x000018    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                     loop   0x00001b    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                  display   0x00002f    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-           oneDegreeDelay   0x000045    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                      isr   0x000046    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
-                     _end   0x000048    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+           oneDegreeDelay   0x000019    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                  degLoop   0x00001b    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+             endOfDisplay   0x00001e    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                    loop2   0x000021    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                     loop   0x000027    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                  display   0x00002d    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                      isr   0x000043    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
+                     _end   0x000045    program     static C:\Users\sng\Documents\GitHub\Propeller-Clock\Propeller Clock.asm
 
 

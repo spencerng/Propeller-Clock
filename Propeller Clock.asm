@@ -8,7 +8,9 @@ START
 #include <p16f887.inc>
  
 COUNT EQU 0x20
+DELAY_COUNT EQU 0x21
 ENTRIES EQU .21 ; however many entries for LEDs
+
  
  
 reset:
@@ -31,37 +33,42 @@ main:
 	MOVF COUNT, 0
 	CALL display
 	MOVWF PORTB
+	CALL oneDegreeDelay
 	INCF COUNT
 	MOVF COUNT, 0
 	SUBLW ENTRIES 
 	BTFSC STATUS, Z
-	GOTO endOfDisplay
+	CALL endOfDisplay
 	GOTO main
 	
-endOfDisplay: ; one degree in 13 us (13 cycles)
-	MOVLW .359
+	
+oneDegreeDelay:
+	MOVLW .50
+	MOVWF DELAY_COUNT
+	degLoop:
+		DECFSZ DELAY_COUNT
+		GOTO degLoop
+	RETURN
+
+	
+	
+endOfDisplay: ;360-blocks used for display delays
+	CLRF PORTB
+	MOVLW .105
+	MOVWF COUNT
+	loop2: 
+		CALL oneDegreeDelay
+		DECFSZ COUNT
+		GOTO loop2
+	MOVLW .255
 	SUBLW ENTRIES
 	MOVWF COUNT
 	loop: 
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
-		NOP
+		CALL oneDegreeDelay
 		DECFSZ COUNT
 		GOTO loop
 	MOVLW .0
 	MOVWF COUNT
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
 	RETURN
 	
 	
@@ -89,9 +96,6 @@ display:
 	RETLW B'10010000'
 	RETLW B'11110000'
 	
-		
-oneDegreeDelay:
-	RETURN
 	
 isr:
 	NOP
